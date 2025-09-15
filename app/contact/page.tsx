@@ -1,6 +1,5 @@
 import NavBar from "@/components/NavBar";
 export const metadata = { title: "Gertech — Contact" };
-
 export default function ContactPage() {
   return (
     <>
@@ -16,7 +15,6 @@ export default function ContactPage() {
             <textarea required name="message" placeholder="What do you need help with?" className="rounded-xl border border-slate-300 px-4 py-3 min-h-[140px]" />
             <button className="rounded-2xl bg-black text-white px-5 py-3">Send</button>
           </form>
-          <p className="text-sm text-slate-500 mt-3">We can swap to a server email route (Resend/SMTP) later for reliability.</p>
         </section>
       </main>
     </>

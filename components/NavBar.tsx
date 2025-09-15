@@ -2,13 +2,11 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-
 const links = [
   { href: "/", label: "Home" },
   { href: "/calendar", label: "Calendar" },
   { href: "/contact", label: "Contact" },
 ];
-
 export default function NavBar() {
   const [open, setOpen] = useState(false);
   return (

@@ -1,12 +1,10 @@
 'use client';
 import { useEffect, useState } from "react";
 type Event = { id: string; summary: string; start: string; end: string; location?: string; htmlLink?: string; };
-
 export default function EventList() {
   const [events, setEvents] = useState<Event[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     fetch("/api/calendar")
       .then((r) => r.json())
@@ -14,11 +12,9 @@ export default function EventList() {
       .catch((e) => setError(String(e)))
       .finally(() => setLoading(false));
   }, []);
-
   if (loading) return <p className="text-slate-600">Loading events…</p>;
   if (error) return <p className="text-red-600">Calendar error: {error}</p>;
   if (!events.length) return <p className="text-slate-600">No upcoming events found.</p>;
-
   return (
     <ul className="space-y-4">
       {events.map((ev) => (
