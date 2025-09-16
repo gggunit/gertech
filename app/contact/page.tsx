@@ -1,17 +1,20 @@
-import NavBar from "@/components/NavBar";
-import ContactForm from "@/components/ContactForm";
-export const metadata = { title: "Gertech — Contact" };
+import ContactForm from '@/components/ContactForm';
+import { motion } from 'framer-motion';
+import { Mail } from 'lucide-react';
+
 export default function ContactPage() {
   return (
-    <>
-      <NavBar />
-      <main className="max-w-6xl mx-auto px-4">
-        <section className="py-12">
-          <h1 className="text-3xl font-bold">Contact German</h1>
-          <p className="text-slate-600 mt-2">Tell me what you need and your preferred timing. I'll get back to you within 24 hours.</p>
+    <main className="min-h-screen hero-bg py-24 px-4">
+      <div className="max-w-2xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
+          <Mail className="w-16 h-16 text-secondary-600 mx-auto mb-4" />
+          <h1 className="text-5xl font-bold text-neutral-900 mb-4">Contact</h1>
+          <p className="text-xl text-neutral-600">Response in 24 hours. Let's collaborate.</p>
+        </motion.div>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
           <ContactForm />
-        </section>
-      </main>
-    </>
+        </motion.div>
+      </div>
+    </main>
   );
 }

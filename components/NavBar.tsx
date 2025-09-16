@@ -1,38 +1,50 @@
 'use client';
-import Link from "next/link";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/calendar", label: "Calendar" },
-  { href: "/contact", label: "Contact" },
-];
+import Link from 'next/link';
+import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
+
 export default function NavBar() {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-100">
-      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="font-semibold text-slate-900 text-lg tracking-tight">Gertech</Link>
-        <nav className="hidden md:flex items-center gap-6">
-          {links.map((l) => (
-            <Link key={l.href} href={l.href} className="text-sm font-medium hover:text-slate-900 text-slate-600 transition-colors">
-              {l.label}
+    <nav className="bg-white/80 backdrop-blur-md shadow-soft border-b border-neutral-200 fixed w-full z-50">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex justify-between items-center py-4">
+          <Link href="/" className="text-2xl font-bold text-neutral-900">
+            Gertech
+          </Link>
+          <div className="hidden md:flex space-x-8">
+            <Link href="/" className="text-neutral-600 hover:text-neutral-900 transition-colors">
+              Home
             </Link>
-          ))}
-        </nav>
-        <button className="md:hidden p-2 rounded-xl border border-slate-200" onClick={() => setOpen(v => !v)} aria-label="Toggle menu">
-          {open ? <X size={18}/> : <Menu size={18}/>}
-        </button>
-      </div>
-      {open && (
-        <div className="md:hidden border-t border-slate-100 bg-white">
-          <div className="max-w-6xl mx-auto px-4 py-3 grid gap-2">
-            {links.map((l) => (
-              <Link key={l.href} href={l.href} className="py-2" onClick={() => setOpen(false)}>{l.label}</Link>
-            ))}
+            <Link href="/calendar" className="text-neutral-600 hover:text-neutral-900 transition-colors">
+              Calendar
+            </Link>
+            <Link href="/contact" className="text-neutral-600 hover:text-neutral-900 transition-colors">
+              Contact
+            </Link>
           </div>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden text-neutral-600 hover:text-neutral-900"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
-      )}
-    </header>
+        {isOpen && (
+          <div className="md:hidden pb-4 space-y-4">
+            <Link href="/" className="block text-neutral-600 hover:text-neutral-900 py-2">
+              Home
+            </Link>
+            <Link href="/calendar" className="block text-neutral-600 hover:text-neutral-900 py-2">
+              Calendar
+            </Link>
+            <Link href="/contact" className="block text-neutral-600 hover:text-neutral-900 py-2">
+              Contact
+            </Link>
+          </div>
+        )}
+      </div>
+    </nav>
   );
 }

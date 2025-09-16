@@ -1,20 +1,24 @@
-import NavBar from "@/components/NavBar";
-import EventList from "@/components/EventList";
-export const metadata = { title: "Gertech — Calendar" };
+import Calendar from '@/components/Calendar';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { Calendar as CalendarIcon } from 'lucide-react';
+
 export default function CalendarPage() {
   return (
-    <>
-      <NavBar />
-      <main className="max-w-6xl mx-auto px-4">
-        <section className="py-12">
-          <h1 className="text-3xl font-bold">German's Availability</h1>
-          <p className="text-slate-600 mt-2">View my real-time schedule and available time slots. Updated automatically from Google Calendar.</p>
-          <div className="mt-2 text-sm text-slate-500">
-            Need to schedule something? <a href="/contact" className="text-blue-600 hover:underline">Contact me</a> with your preferred times.
-          </div>
-          <div className="mt-6"><EventList /></div>
-        </section>
-      </main>
-    </>
+    <main className="min-h-screen hero-bg py-24 px-4">
+      <div className="max-w-4xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
+          <CalendarIcon className="w-16 h-16 text-primary-600 mx-auto mb-4" />
+          <h1 className="text-5xl font-bold text-neutral-900 mb-4">Availability</h1>
+          <p className="text-xl text-neutral-600 mb-8">Real-time Google Calendar. Book seamlessly.</p>
+          <Link href="/contact" className="cta-button">
+            Book Appointment
+          </Link>
+        </motion.div>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+          <Calendar />
+        </motion.div>
+      </div>
+    </main>
   );
 }

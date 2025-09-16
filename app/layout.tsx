@@ -1,16 +1,36 @@
-import './globals.css';
-export const metadata = { 
-  title: 'Gertech — Tech, Automation & Handiwork',
-  robots: { index: false, follow: false },
-  description: 'Private tech services, automation, and handiwork by German Gladkov'
-};
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import NavBar from '@/components/NavBar'
+
+const inter = Inter({ 
+  subsets: ['latin'], 
+  display: 'swap',
+  variable: '--font-inter',
+})
+
+export const metadata: Metadata = {
+  title: 'Gertech - Premium Tech Support & Handiwork Services',
+  description: 'Expert AI automation, tech support, home repairs, and more. Bay Area based, professional and reliable.',
+  keywords: 'tech support, AI automation, home repairs, plant care, calendar management',
+  openGraph: {
+    title: 'Gertech - Premium Tech & Handiwork',
+    description: 'Friendly, skilled help for your digital life and home.',
+    images: '/og-image.png',  // Add a public image later
+  },
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <head>
-        <meta name="robots" content="noindex, nofollow" />
-      </head>
-      <body>{children}</body>
+      <body className={`${inter.variable} font-sans`}>
+        <NavBar />
+        {children}
+      </body>
     </html>
-  );
+  )
 }

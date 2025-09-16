@@ -1,77 +1,211 @@
-import NavBar from "@/components/NavBar";
-import Link from "next/link";
-export const metadata = { title: "Gertech — Tech, Automation & Handiwork" };
+'use client';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { Brain, Monitor, Tools, Folder, Leaf, Calendar } from 'lucide-react';
+import { useState, useEffect } from 'react';
+
+const services = [
+  { title: 'AI & Automation', desc: 'Custom AI workflows, ChatGPT integrations, calendar automation, email management, and smart home setups.', icon: Brain },
+  { title: 'Tech Support', desc: 'Computer troubleshooting, software setup, device configuration, data backup, and cybersecurity basics.', icon: Monitor },
+  { title: 'Home Repairs', desc: 'TV mounting, furniture assembly, basic electrical work, plumbing fixes, and general handyman tasks.', icon: Tools },
+  { title: 'Organization', desc: 'Digital file organization, workspace setup, productivity systems, and decluttering assistance.', icon: Folder },
+  { title: 'Plant Care', desc: 'Garden maintenance, plant health diagnosis, watering systems, and green space optimization.', icon: Leaf },
+  { title: 'Calendar Management', desc: 'Schedule optimization, appointment coordination, meeting prep, and time management systems.', icon: Calendar },
+];
+
+const whys = [
+  { title: 'Personalized Service', desc: 'Every solution tailored to your needs. No cookie-cutter approaches.', icon: '✨' },
+  { title: 'Flexible Scheduling', desc: 'Evenings, weekends—check real-time availability.', icon: '🕒' },
+  { title: 'Fair Pricing', desc: 'Transparent, no hidden fees. Small jobs welcome.', icon: '💰' },
+  { title: 'Local Expertise', desc: 'Bay Area pro with deep tech and home knowledge.', icon: '📍' },
+];
+
+const testimonials = [
+  { quote: 'German transformed my setup—efficient and genius!', name: 'Alex S.', role: 'Tech Enthusiast' },
+  { quote: 'Revived my garden like magic. Thriving now!', name: 'Jamie L.', role: 'Homeowner' },
+  { quote: 'Reliable, affordable support. 10/10 recommend!', name: 'Taylor R.', role: 'Entrepreneur' },
+];
+
+const pricing = [
+  { tier: 'Basic', desc: 'Quick fixes & consults', price: '$50/hr', features: ['1-hour session', 'Email support'] },
+  { tier: 'Standard', desc: 'Full setups & repairs', price: '$75/hr', features: ['On-site visits', 'Follow-up'] },
+  { tier: 'Premium', desc: 'Custom AI & ongoing', price: 'From $200/project', features: ['Full automation', 'Monthly check-ins'] },
+];
+
 export default function Home() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
-    <>
-      <NavBar />
-      <main className="max-w-6xl mx-auto px-4">
-        <section className="py-14">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">Gertech — Tech, Automation & Handiwork</h1>
-          <p className="mt-4 text-lg text-slate-600">Friendly, skilled help for your digital life and your home — from AI automations and calendar ops to mounting, fixes, and plant care.</p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/calendar" className="inline-flex items-center justify-center rounded-2xl bg-black text-white px-5 py-3 hover:bg-slate-800 transition-colors">View Calendar</Link>
-            <Link href="/contact" className="inline-flex items-center justify-center rounded-2xl border border-slate-200 px-5 py-3 hover:bg-slate-50 transition-colors">Contact</Link>
-          </div>
-        </section>
+    <main className="min-h-screen">
+      {/* Hero Section - High-End Gradient with Overlay */}
+      <section className="hero-bg relative overflow-hidden py-24 px-4">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="relative z-10 max-w-6xl mx-auto text-center">
+          <motion.h1 
+            initial={{ opacity: 0, y: 50 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            className="text-6xl md:text-7xl font-bold text-neutral-900 mb-6 leading-tight"
+          >
+            Gertech
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 30 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ delay: 0.2 }}
+            className="text-xl md:text-2xl text-neutral-600 mb-10 max-w-3xl mx-auto"
+          >
+            Premium tech, automation & handiwork. Elevate your digital life and home with expert, personalized service.
+          </motion.p>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <Link href="/calendar" className="cta-button">
+              View Availability
+            </Link>
+            <Link href="/contact" className="cta-button bg-neutral-900 hover:bg-neutral-800">
+              Get Quote
+            </Link>
+          </motion.div>
+        </div>
+      </section>
 
-        <section className="py-12 border-t border-slate-100">
-          <h2 className="text-2xl font-bold text-slate-900 mb-8">Services I Offer</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl border border-slate-200 bg-white hover:shadow-sm transition-shadow">
-              <h3 className="font-semibold text-slate-900 mb-2">AI & Automation</h3>
-              <p className="text-sm text-slate-600">Custom AI workflows, ChatGPT integrations, calendar automation, email management, and smart home setups.</p>
-            </div>
-            <div className="p-6 rounded-2xl border border-slate-200 bg-white hover:shadow-sm transition-shadow">
-              <h3 className="font-semibold text-slate-900 mb-2">Tech Support</h3>
-              <p className="text-sm text-slate-600">Computer troubleshooting, software setup, device configuration, data backup, and cybersecurity basics.</p>
-            </div>
-            <div className="p-6 rounded-2xl border border-slate-200 bg-white hover:shadow-sm transition-shadow">
-              <h3 className="font-semibold text-slate-900 mb-2">Home Repairs</h3>
-              <p className="text-sm text-slate-600">TV mounting, furniture assembly, basic electrical work, plumbing fixes, and general handyman tasks.</p>
-            </div>
-            <div className="p-6 rounded-2xl border border-slate-200 bg-white hover:shadow-sm transition-shadow">
-              <h3 className="font-semibold text-slate-900 mb-2">Organization</h3>
-              <p className="text-sm text-slate-600">Digital file organization, workspace setup, productivity systems, and decluttering assistance.</p>
-            </div>
-            <div className="p-6 rounded-2xl border border-slate-200 bg-white hover:shadow-sm transition-shadow">
-              <h3 className="font-semibold text-slate-900 mb-2">Plant Care</h3>
-              <p className="text-sm text-slate-600">Garden maintenance, plant health diagnosis, watering systems, and green space optimization.</p>
-            </div>
-            <div className="p-6 rounded-2xl border border-slate-200 bg-white hover:shadow-sm transition-shadow">
-              <h3 className="font-semibold text-slate-900 mb-2">Calendar Management</h3>
-              <p className="text-sm text-slate-600">Schedule optimization, appointment coordination, meeting prep, and time management systems.</p>
-            </div>
+      {/* Services - Glass Cards with Icons */}
+      <section className="py-20 px-4 bg-neutral-50">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2 
+            initial={{ opacity: 0 }} 
+            whileInView={{ opacity: 1 }} 
+            className="text-4xl font-bold text-center text-neutral-900 mb-16"
+          >
+            Services
+          </motion.h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service, i) => {
+              const Icon = service.icon;
+              return (
+                <motion.div
+                  key={service.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="glass-card text-center"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <Icon className="w-12 h-12 text-primary-600 mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                  <p className="text-neutral-600">{service.desc}</p>
+                </motion.div>
+              );
+            })}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="py-12 border-t border-slate-100">
-          <div className="bg-slate-50 rounded-2xl p-8">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">Why Choose Gertech?</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h3 className="font-semibold text-slate-900 mb-2">Personalized Service</h3>
-                <p className="text-sm text-slate-600">Every solution is tailored to your specific needs and lifestyle. No one-size-fits-all approaches.</p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-slate-900 mb-2">Flexible Scheduling</h3>
-                <p className="text-sm text-slate-600">Available evenings and weekends. Check my real-time calendar for immediate availability.</p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-slate-900 mb-2">Fair Pricing</h3>
-                <p className="text-sm text-slate-600">Transparent rates with no hidden fees. Small jobs welcome — no project too small.</p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-slate-900 mb-2">Local Knowledge</h3>
-                <p className="text-sm text-slate-600">Bay Area based with deep understanding of local needs, from tech trends to home maintenance.</p>
-              </div>
-            </div>
+      {/* Why Choose - Simple Elegant Cards */}
+      <section className="py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2 
+            initial={{ opacity: 0 }} 
+            whileInView={{ opacity: 1 }} 
+            className="text-4xl font-bold text-center text-neutral-900 mb-16"
+          >
+            Why Gertech?
+          </motion.h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {whys.map((why, i) => (
+              <motion.div
+                key={why.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="text-center p-6 rounded-xl bg-white shadow-soft hover:shadow-glass transition-all"
+              >
+                <div className="text-3xl mb-3">{why.icon}</div>
+                <h3 className="text-xl font-semibold mb-3">{why.title}</h3>
+                <p className="text-neutral-600">{why.desc}</p>
+              </motion.div>
+            ))}
           </div>
-        </section>
-      </main>
-      <footer className="mt-16 border-t border-slate-100">
-        <div className="max-w-6xl mx-auto px-4 py-10 text-sm text-slate-600">© {new Date().getFullYear()} Gertech</div>
-      </footer>
-    </>
+        </div>
+      </section>
+
+      {/* Testimonials - Italic Quotes */}
+      <section className="py-20 px-4 bg-neutral-50">
+        <div className="max-w-4xl mx-auto">
+          <motion.h2 
+            initial={{ opacity: 0 }} 
+            whileInView={{ opacity: 1 }} 
+            className="text-4xl font-bold text-center text-neutral-900 mb-16"
+          >
+            Client Love
+          </motion.h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="glass-card italic text-neutral-700 p-8"
+              >
+                <p className="mb-6 text-lg">"{testimonial.quote}"</p>
+                <div className="text-right">
+                  <p className="font-semibold text-neutral-900">{testimonial.name}</p>
+                  <p className="text-neutral-500 text-sm">{testimonial.role}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing - Feature Lists */}
+      <section className="py-20 px-4">
+        <div className="max-w-4xl mx-auto">
+          <motion.h2 
+            initial={{ opacity: 0 }} 
+            whileInView={{ opacity: 1 }} 
+            className="text-4xl font-bold text-center text-neutral-900 mb-16"
+          >
+            Transparent Pricing
+          </motion.h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {pricing.map((plan, i) => (
+              <motion.div
+                key={plan.tier}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="glass-card text-center p-8 border-t-4 border-primary-500"
+              >
+                <h3 className="text-2xl font-bold mb-2">{plan.tier}</h3>
+                <p className="text-4xl font-bold text-primary-600 mb-4">{plan.price}</p>
+                <p className="text-neutral-600 mb-6">{plan.desc}</p>
+                <ul className="text-left space-y-2 mb-6">
+                  {plan.features.map((feat, j) => (
+                    <li key={j} className="flex items-center">
+                      <span className="w-2 h-2 bg-secondary-500 rounded-full mr-2"></span>
+                      {feat}
+                    </li>
+                  ))}
+                </ul>
+                <Link href="/contact" className="cta-button w-full justify-center">
+                  Choose {plan.tier}
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
