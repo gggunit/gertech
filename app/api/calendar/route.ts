@@ -1,29 +1,44 @@
 import { NextResponse } from "next/server";
-import { google } from "googleapis";
-import path from "path";
 
-type GCalApiEvent = {
-  id: string;
-  summary?: string;
-  start?: { dateTime?: string; date?: string };
-  end?: { dateTime?: string; date?: string };
-  location?: string;
-  htmlLink?: string;
-};
+// Temporary mock data for testing
+const mockEvents = [
+  {
+    id: "1",
+    summary: "Available for consultation",
+    start: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // Tomorrow
+    end: new Date(Date.now() + 25 * 60 * 60 * 1000).toISOString(),
+    location: "Video call",
+  },
+  {
+    id: "2", 
+    summary: "Tech support session",
+    start: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString(), // Day after tomorrow
+    end: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000 + 2 * 60 * 60 * 1000).toISOString(),
+    location: "On-site or remote",
+  }
+];
 
 export async function GET() {
-  const calId = process.env.GOOGLE_CALENDAR_ID;
-  const keyPath = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_PATH;
-  
-  if (!calId || !keyPath) {
-    return NextResponse.json({ 
-      events: [], 
-      error: "Missing GOOGLE_CALENDAR_ID or GOOGLE_SERVICE_ACCOUNT_KEY_PATH" 
-    });
-  }
-
   try {
-    // Initialize Google Auth with service account
+    // For now, return mock data to test the frontend
+    // Later, uncomment the Google Calendar integration below
+    return NextResponse.json({ events: mockEvents });
+
+    /* 
+    // Google Calendar integration (commented out for testing)
+    const calId = process.env.GOOGLE_CALENDAR_ID;
+    const keyPath = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_PATH;
+    
+    if (!calId || !keyPath) {
+      return NextResponse.json({ 
+        events: mockEvents, 
+        error: "Google Calendar not configured, showing mock data" 
+      });
+    }
+
+    const { google } = require("googleapis");
+    const path = require("path");
+
     const auth = new google.auth.GoogleAuth({
       keyFile: path.resolve(keyPath),
       scopes: ['https://www.googleapis.com/auth/calendar.readonly'],
@@ -33,7 +48,7 @@ export async function GET() {
 
     const now = new Date();
     const timeMin = now.toISOString();
-    const timeMax = new Date(now.getTime() + 1000 * 60 * 60 * 24 * 60).toISOString(); // +60 days
+    const timeMax = new Date(now.getTime() + 1000 * 60 * 60 * 24 * 60).toISOString();
 
     const response = await calendar.events.list({
       calendarId: calId,
@@ -43,8 +58,7 @@ export async function GET() {
       orderBy: 'startTime',
     });
 
-    const items: GCalApiEvent[] = response.data.items || [];
-
+    const items = response.data.items || [];
     const events = items.map((e) => ({
       id: e.id || '',
       summary: e.summary ?? "Untitled",
@@ -55,12 +69,13 @@ export async function GET() {
     }));
 
     return NextResponse.json({ events });
+    */
     
   } catch (error) {
     console.error('Calendar API error:', error);
     return NextResponse.json({ 
-      events: [], 
-      error: `Service account authentication failed: ${error instanceof Error ? error.message : 'Unknown error'}` 
+      events: mockEvents, 
+      error: `Falling back to mock data: ${error instanceof Error ? error.message : 'Unknown error'}` 
     });
   }
 }

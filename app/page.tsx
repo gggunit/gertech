@@ -43,8 +43,30 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
-      {/* Hero Section - High-End Gradient with Overlay */}
-      <section className="hero-bg relative overflow-hidden py-24 px-4">
+      {/* Navigation */}
+      <nav className="bg-white/80 backdrop-blur-md shadow-lg border-b border-neutral-200 fixed w-full z-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex justify-between items-center py-4">
+            <Link href="/" className="text-2xl font-bold text-neutral-900">
+              Gertech
+            </Link>
+            <div className="hidden md:flex space-x-8">
+              <Link href="/" className="text-neutral-600 hover:text-neutral-900 transition-colors">
+                Home
+              </Link>
+              <Link href="/calendar" className="text-neutral-600 hover:text-neutral-900 transition-colors">
+                Calendar
+              </Link>
+              <Link href="/contact" className="text-neutral-600 hover:text-neutral-900 transition-colors">
+                Contact
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="hero-bg relative overflow-hidden py-32 px-4">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative z-10 max-w-6xl mx-auto text-center">
           <motion.h1 
@@ -78,7 +100,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services - Glass Cards with Icons */}
+      {/* Services */}
       <section className="py-20 px-4 bg-neutral-50">
         <div className="max-w-6xl mx-auto">
           <motion.h2 
@@ -89,28 +111,25 @@ export default function Home() {
             Services
           </motion.h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, i) => {
-              const Icon = service.icon;
-              return (
-                <motion.div
-                  key={service.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  className="glass-card text-center"
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <Icon className="w-12 h-12 text-primary-600 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-                  <p className="text-neutral-600">{service.desc}</p>
-                </motion.div>
-              );
-            })}
+            {services.map((service, i) => (
+              <motion.div
+                key={service.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="glass-card text-center"
+                whileHover={{ scale: 1.02 }}
+              >
+                <service.icon className="w-12 h-12 text-primary-600 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                <p className="text-neutral-600">{service.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Why Choose - Simple Elegant Cards */}
+      {/* Why Choose */}
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.h2 
@@ -127,7 +146,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="text-center p-6 rounded-xl bg-white shadow-soft hover:shadow-glass transition-all"
+                className="text-center p-6 rounded-xl bg-white shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1)] hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all"
               >
                 <div className="text-3xl mb-3">{why.icon}</div>
                 <h3 className="text-xl font-semibold mb-3">{why.title}</h3>
@@ -138,7 +157,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials - Italic Quotes */}
+      {/* Testimonials */}
       <section className="py-20 px-4 bg-neutral-50">
         <div className="max-w-4xl mx-auto">
           <motion.h2 
@@ -168,7 +187,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pricing - Feature Lists */}
+      {/* Pricing */}
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto">
           <motion.h2 

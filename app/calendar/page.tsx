@@ -1,3 +1,4 @@
+'use client';
 import Calendar from '@/components/Calendar';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
